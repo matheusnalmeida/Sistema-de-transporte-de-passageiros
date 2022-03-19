@@ -1,3 +1,4 @@
+import os
 from flask import Flask, render_template, Blueprint
 from app.config import DefaultConfig
 
@@ -9,6 +10,7 @@ def create_app(config=None, app_name=None):
     configure_app(app, config)
     configure_hook(app)
     configure_blueprints(app)
+    configure_error_handlers(app)
 
     return app
 
@@ -35,4 +37,4 @@ def configure_hook(app):
 def configure_error_handlers(app):
     @app.errorhandler(404)
     def page_not_found(error):
-        return render_template("errors/404.html"), 404
+        return render_template("erros/404.html"), 404

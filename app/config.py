@@ -1,9 +1,10 @@
 import os
+from app.utils import PROJECT_ROOT
 
 class BaseConfig(object):
     PROJECT = "Sistema gerenciador de clientes"
 
-    PROJECT_ROOT = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
+    PROJECT_ROOT = PROJECT_ROOT
 
     DEBUG = False
     TESTING = False
