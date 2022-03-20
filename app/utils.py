@@ -2,7 +2,11 @@ import os
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 
-TEMPLATES_ROOT_PATH = os.path.join(PROJECT_ROOT, 'app',  'templates')
+APP_ROOT = os.path.join(PROJECT_ROOT, 'app')
+
+DATA_ROOT_PATH = os.path.join(APP_ROOT,  'data')
+
+TEMPLATES_ROOT_PATH = os.path.join(APP_ROOT,  'templates')
 
 INSTANCE_FOLDER_PATH = os.path.join('/tmp', 'instance')
 

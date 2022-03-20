@@ -4,6 +4,7 @@ BASE_DIR = os.path.join(os.path.dirname(__file__))
 if BASE_DIR not in sys.path:
     sys.path.append(BASE_DIR)
 
+from app.extensions import db
 from app import create_app
 
 app = create_app()

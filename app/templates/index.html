@@ -1,0 +1,13 @@
+{% extends "shared/base.html" %}
+{% block title %}Index{% endblock %}
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}" />
+{% endblock %}
+{% block content %}
+    <h1 class="home-text">Bem Vindo</h1>
+    <p class="home-text">
+      Esse é sistema simples de controle de transporte de passageiros, 
+      focado no gerenciamento de motoristas, passageiros e extração de relatórios de custo dos transportes realizados.
+    </p>
+{% endblock %}
