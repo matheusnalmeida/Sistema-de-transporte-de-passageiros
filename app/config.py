@@ -10,6 +10,6 @@ class BaseConfig(object):
 
 class DefaultConfig(BaseConfig):
     DEBUG = True
-    SQLALCHEMY_ECHO = False
+    SQLALCHEMY_ECHO = True
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_DATABASE_URI = 'sqlite:///' + DATA_ROOT_PATH + '/database.db'

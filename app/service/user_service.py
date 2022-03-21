@@ -1,34 +1,42 @@
+from flask_login import login_user
+from app.models.result import Result
+from app.models.user import User
+from app.extensions import db
+
 class UserService:
     def __init__(self) -> None:
-        self.database = MemoryDatabase.instance()
-
-    def insert_user(self, user: User) -> ServiceResponse:
-        userAlreadyExists = self.__get_user_by_username(user.usuario)
-        if userAlreadyExists:
-            return ServiceResponse(success= False,message= "Ja existe um usuário cadastrado com este nome de usuário!")
-
-        if (user.is_valid()):
-           self.database.users_table[user.id] = user 
-           return ServiceResponse(success=True, message="Usuário registrado com sucesso!")
-
-        return ServiceResponse(success= False,message= "Existem informações inválidas!")
-
-    def login(self, username: str, password: str) -> ServiceResponse:
-        user  = self.__get_user_by_username_pass(username, password)
-        if user:
-            user.senha = None
-            return ServiceResponse(success=True, data=user)
-        else:
-            return ServiceResponse(success=False, message="Usuário ou senha inválidos!")
+        pass
     
-    def __get_user_by_username(self, username: str) -> User:
-        for id in self.database.users_table:
-            user = self.database.users_table[id]
-            if user.usuario == username:
-                return copy.copy(user)   
+    def login(self, username, password):
+        if not username or not password:
+            return Result(success=False, message="É necessário informar o usuário e senha para logar!")
+        
+        user = User.query.filter_by(login=username).first()
 
-    def __get_user_by_username_pass(self, username: str, password: str) -> User:
-        for id in self.database.users_table:
-            user = self.database.users_table[id]
-            if user.usuario == username and user.senha == password:
-                return copy.copy(user)             
+        if user and user.check_password(password):
+            login_user(user, remember='y')
+            return Result(success=True)
+        else:
+            return Result(success=False, message="Não foi encontrado usuário com o usuário e senha informados!")
+
+    def insert_user(self, user: User) -> Result:
+        result = user.is_valid()
+        if not result.success:
+            return result
+        
+        userAlreadyExistsByName =  User.query.filter_by(name=user.name).first()
+        if userAlreadyExistsByName:
+           return Result(success=False, message="Ja existe um usuário cadastrado com o nome informado!")
+
+        userAlreadyExistsByCPF =  User.query.filter_by(cpf=user.cpf).first()
+        if userAlreadyExistsByCPF:
+           return Result(success=False, message="Ja existe um usuário cadastrado com o cpf informado!")
+        
+        userAlreadyExistsByLogin =  User.query.filter_by(login=user.login).first()
+        if userAlreadyExistsByLogin:
+           return Result(success=False, message="Ja existe um usuário cadastrado com o login informado!")
+        
+        db.session.add(user)
+        db.session.commit()
+        return Result(success= True, message= "Usuário registrado com sucesso!")
+        

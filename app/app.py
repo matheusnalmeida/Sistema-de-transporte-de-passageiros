@@ -1,8 +1,6 @@
-import datetime
 from flask import Flask, render_template
 from app.config import DefaultConfig
 from app.extensions import db, bcrypt, login_manager
-from app.data.cache import Cache
 from app.models.user import User
 
 def create_app(config=None, app_name=None):
@@ -45,9 +43,8 @@ def configure_extensions(app):
 
     @login_manager.user_loader
     def load_user(id):
-        users_table = Cache.instance().users_table
-        return users_table[id]
-        
+        return User.query.get(id)
+
     login_manager.setup_app(app)
 
 def configure_blueprints(appl):
