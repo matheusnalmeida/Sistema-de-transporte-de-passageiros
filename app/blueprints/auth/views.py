@@ -39,7 +39,8 @@ def register():
                         birth_date = request.form['birthdate'],
                         cpf = request.form['cpf'],
                         login = request.form['login'],
-                        password = request.form['password'])        
+                        password = request.form['password'],
+                        address = request.form['address'])        
         result = user_service.insert_user(newUser)
 
         if result.success:

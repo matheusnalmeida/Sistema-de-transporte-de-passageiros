@@ -14,6 +14,7 @@ class User(db.Model, UserMixin):
     _cpf = Column('cpf', db.String(11), nullable = False, unique = True)
     login = Column(db.String(255), nullable=False, unique=True)
     _password = Column('password', db.String(200), nullable=False)
+    address = Column(db.String(255), nullable=False)
 
     def _get_cpf(self):
         return self._cpf
@@ -54,7 +55,8 @@ class User(db.Model, UserMixin):
             not self.name or len(self.name) == 0 or
             not self.cpf or len(self.cpf) == 0 or
             not self.login or len(self.login) == 0 or
-            not self.password or len(self.password) == 0          
+            not self.password or len(self.password) == 0 or
+            not self.address or len(self.address) == 0 
         ):
             return Result(success= False,message= "Preencha todos os campos!")
 
@@ -62,6 +64,9 @@ class User(db.Model, UserMixin):
             return Result(success= False,message= "CPF inválido!")
         
         if not self.birth_date:
-            return Result(success= False,message= "Data possui formato inválido!")
- 
+            return Result(success= False,message= "Data inválida!")
+                
+        if  datetime.now().date() < self.birth_date:
+            return Result(success= False,message= "A data de nascimento não pode ser maior que a data atual!")
+
         return Result(success=True)            

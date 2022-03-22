@@ -17,8 +17,9 @@ $(document).ready(function(){
       var passwordFilled = !!$("#password-input").val().trim()
       var birthdateFilled = !!$("#birthdate-input").val().trim()
       var cpfFilled = !!$("#cpf-input").val().trim()
+      var adressFilled = !!$("#address-input").val().trim()
 
-      if (!nameFilled || !loginFilled || !passwordFilled || !birthdateFilled || !cpfFilled) {          
+      if (!nameFilled || !loginFilled || !passwordFilled || !birthdateFilled || !cpfFilled || !adressFilled) {          
         toastr.error('Por favor preencha todos os dados para seguir com o cadastro!')
         return;
       }
