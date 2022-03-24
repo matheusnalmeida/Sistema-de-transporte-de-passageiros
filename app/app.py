@@ -50,8 +50,9 @@ def configure_extensions(app):
 def configure_blueprints(appl):
     from app.blueprints.main import main
     from app.blueprints.auth import auth
+    from app.blueprints.passenger import passenger
 
-    for bp in [main, auth]:
+    for bp in [main, auth, passenger]:
         appl.register_blueprint(bp)
 
 def configure_hook(app):

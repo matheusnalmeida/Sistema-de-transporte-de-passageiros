@@ -18,6 +18,7 @@ def login():
 
         result = user_service.login(request.form['username'],
                                      request.form['password'])
+
         if result.success:
             result.url = url_for('main.index')
             
@@ -26,7 +27,7 @@ def login():
 @auth.route('/logout')
 @login_required
 def logout():
-    if current_user.is_authenticated():
+    if current_user.is_authenticated:
         logout_user()
     return redirect(url_for('auth.login'))
 

@@ -44,5 +44,16 @@
   padding-bottom: 10px;
 }
 
-/* Removendo placeholder do input de data */
+/* 
+Removendo placeholder do input de data 
 input[type="date"]:in-range::-webkit-datetime-edit-year-field, input[type="date"]:in-range::-webkit-datetime-edit-month-field, input[type="date"]:in-range::-webkit-datetime-edit-day-field, input[type="date"]:in-range::-webkit-datetime-edit-text { 	color: transparent; }
+*/
+
+.top-table .btn {
+  color: #fff;
+  float: right;
+  font-size: 15px;
+  margin-right: 5px;
+  margin-top: 50px;
+  margin-bottom: 15px;
+}

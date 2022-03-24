@@ -1,4 +1,5 @@
 import os
+import re
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 
@@ -11,3 +12,11 @@ TEMPLATES_ROOT_PATH = os.path.join(APP_ROOT,  'templates')
 INSTANCE_FOLDER_PATH = os.path.join('/tmp', 'instance')
 
 ALLOWED_AVATAR_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
+
+
+def cpf_formatter(cpf :str):
+    if cpf:
+        cpf = re.sub('[\.|-]', '', cpf)
+        cpf_digits = re.findall(r'\d+', cpf)    
+        if len(cpf_digits) > 0:      
+            return cpf_digits[0]  

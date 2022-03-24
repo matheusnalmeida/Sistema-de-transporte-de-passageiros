@@ -2,10 +2,10 @@
 {% block title %}Index{% endblock %}
 {% block head %}
     {{ super() }}
-    <script src="{{ url_for('static', filename='js/auth/register.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/passenger/register.js') }}"></script>
 {% endblock %}
 {% block content %}
-<form id="register-user-form" action="#" method="post">
+<form id="passenger-user-form" action="#" method="post">
     <div class="container">
       <div style="padding: 100px;" class="row d-flex justify-content-center align-items-center">
         <div class="col-xl-9">
@@ -49,19 +49,19 @@
               <hr class="mx-n3">                     
               <div class="row align-items-center py-3">
                 <div class="col-md-3 ps-5">
-                  <h6 class="mb-0">Usuário</h6>
+                  <h6 class="mb-0">Cidade</h6>
                 </div>
                 <div class="col-md-9 pe-5">
-                  <input id="login-input" type="text" class="form-control form-control-lg" name="login"/>
+                  <input id="city-input" type="text" class="form-control form-control-lg" name="city"/>
                 </div>
               </div>
               <hr class="mx-n3">
               <div class="row align-items-center py-3">
                 <div class="col-md-3 ps-5">
-                  <h6 class="mb-0">Senha</h6>
+                  <h6 class="mb-0">UF</h6>
                 </div>
                 <div class="col-md-9 pe-5">
-                    <input id="password-input" type="password" class="form-control form-control-lg" name="password"/>
+                    <input id="uf-input" type="text" class="form-control form-control-lg" name="uf" maxlength="2"/>
                 </div>
               </div>                
               <hr class="mx-n3">
