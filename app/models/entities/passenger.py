@@ -2,6 +2,7 @@ from sqlalchemy import Column
 from app.extensions import db
 from app.models.result import Result
 from datetime import datetime
+from app.models.view.passenger_view_model import PassengerViewModel
 
 from app.utils import cpf_formatter
 
@@ -55,3 +56,10 @@ class Passenger(db.Model):
             return Result(success= False,message= "A data de nascimento não pode ser maior que a data atual!")
 
         return Result(success=True)            
+    
+    def fill_update(self, passenger: PassengerViewModel):
+        self.name = passenger.name
+        self._set_birthdate(passenger.birth_date)
+        self.city = passenger.city
+        self.uf = passenger.uf
+        self.address = passenger.address

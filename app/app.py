@@ -1,7 +1,7 @@
 from flask import Flask, render_template
 from app.config import DefaultConfig
 from app.extensions import db, bcrypt, login_manager
-from app.models.user import User
+from app.models.entities.user import User
 
 def create_app(config=None, app_name=None):
     if app_name is None:

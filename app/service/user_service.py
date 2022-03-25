@@ -1,6 +1,6 @@
 from flask_login import login_user
 from app.models.result import Result
-from app.models.user import User
+from app.models.entities.user import User
 from app.extensions import db
 
 class UserService:

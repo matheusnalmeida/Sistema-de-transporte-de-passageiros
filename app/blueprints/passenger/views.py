@@ -1,6 +1,8 @@
-from flask import Blueprint, jsonify, render_template, request, url_for
+from asyncore import read
+from flask import Blueprint, jsonify, redirect, render_template, request, url_for
 from flask_login import login_required
-from app.models.passenger import Passenger
+from app.models.entities.passenger import Passenger
+from app.models.view.passenger_view_model import PassengerViewModel
 from app.service.passenger_service import PassengerService
 from app.utils import TEMPLATES_ROOT_PATH
 
@@ -38,4 +40,24 @@ def update(id):
     if request.method == 'GET':
         return render_template('passenger/update.html', passenger=passenger)
     else:
-        pass
+        passenger_view = PassengerViewModel(
+                        name = request.form["name"],
+                        birth_date = request.form["birthdate"],
+                        address= request.form["address"],
+                        city = request.form["city"],
+                        uf=request.form["uf"])
+
+        result = passenger_service.update_passenger(passenger, passenger_view)
+
+        if result.success:
+            result.url = url_for('passenger.index')
+
+        return jsonify(result.to_json())
+        
+@passenger.route("<int:id>/delete", methods=['GET'])
+@login_required
+def delete(id):
+    passenger = Passenger.query.get_or_404(id)
+    result = passenger_service.delete_passenger(passenger)        
+    result.url = url_for('passenger.index')
+    return jsonify(result.to_json())

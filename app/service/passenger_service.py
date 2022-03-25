@@ -1,6 +1,10 @@
-from app.models.passenger import Passenger
+from xml.etree.ElementTree import TreeBuilder
+
+from jinja2 import pass_eval_context
+from app.models.entities.passenger import Passenger
 from app.models.result import Result
 from app.extensions import db
+from app.models.view.passenger_view_model import PassengerViewModel
 
 class PassengerService:
     def __init__(self) -> None:
@@ -23,5 +27,22 @@ class PassengerService:
         db.session.commit()
         return Result(success= True, message= "Passageiro registrado com sucesso!")
     
+    def update_passenger(self, current_passenger: Passenger, passenger_view: PassengerViewModel):
+        current_passenger.fill_update(passenger_view)
+        result = current_passenger.is_valid()
+
+        if not result.success:
+            return result
+
+        db.session.commit()
+        return Result(success=True, message="Passageiro atualizado com sucesso!")
+
+    def delete_passenger(self, passenger: Passenger):
+        db.session.delete(passenger)
+        db.session.commit()
+        
+        return Result(success=True, message="Passageiro deletado com sucesso!")
+
+
     def get_all(self):
         return Passenger.query.all()

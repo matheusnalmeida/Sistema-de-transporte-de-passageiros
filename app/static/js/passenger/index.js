@@ -8,4 +8,27 @@ $(document).ready(function(){
         let date = new Date($(el).text()).toLocaleDateString()
         $(el).text(date)
     })
+
+    $("#delete-passenger").click(function(event) {
+        event.preventDefault();
+        let actionUrl = $("#delete-passenger").attr('href')
+        $.ajax({
+            type: "GET",
+            url: actionUrl,
+            success: function(data)
+            {
+              mensagem = data.message
+              if(data.success)
+              {
+                sessionStorage.setItem('sucessRegister', mensagem)
+                window.location.href = data.url
+                return;
+              }
+              toastr.error(mensagem)
+            },
+            error: function (data) {
+              toastr.error('Ocorreu um erro ao tentar deletar o passageiro. Contate o administrador!')
+          }
+        });  
+    });
 });
