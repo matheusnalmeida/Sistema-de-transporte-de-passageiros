@@ -8,10 +8,9 @@ $(document).ready(function(){
         let date = new Date($(el).text()).toLocaleDateString()
         $(el).text(date)
     })
-
-    $("#delete-driver").click(function(event) {
+    $('[id^=delete-driver]').click(function(event) {
         event.preventDefault();
-        let actionUrl = $("#delete-driver").attr('href')
+        let actionUrl = $(this).attr('href')
         $.ajax({
             type: "GET",
             url: actionUrl,

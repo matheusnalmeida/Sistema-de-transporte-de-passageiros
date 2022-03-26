@@ -4,9 +4,9 @@ $(document).ready(function(){
         $(el).text(cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4"))
     })
 
-    $("#delete-vehicle").click(function(event) {
+    $('[id^=delete-vehicle]').click(function(event) {
         event.preventDefault();
-        let actionUrl = $("#delete-vehicle").attr('href')
+        let actionUrl = $(this).attr('href')
         $.ajax({
             type: "GET",
             url: actionUrl,

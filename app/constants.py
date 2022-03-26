@@ -1,5 +1,5 @@
 VEHICLE_TYPES = {
-    'carro': 'Carro',
-    'onibus': 'Onibus',
-    'van': 'Van',
+    'Carro': 'Carro',
+    'Onibus': 'Onibus',
+    'Van': 'Van',
 }

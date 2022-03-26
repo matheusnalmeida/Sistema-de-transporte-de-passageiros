@@ -16,7 +16,15 @@
                   <h6 class="mb-0">Tipo</h6>
                 </div>
                 <div class="col-md-9 pe-5">
-                  <input id="type-input" type="text" class="form-control form-control-lg" name="type" value="{{ vehicle.type }}"/>
+                    <select id="type-input" class="form-control form-control-lg" name="type">
+                        {% for type in vehicle_types %}
+                        {% if vehicle.type ==  type%}
+                            <option value="{{type}}" selected="selected">{{vehicle_types[type]}}</option>             
+                        {% else %}
+                            <option value="{{type}}">{{vehicle_types[type]}}</option>             
+                        {% endif %}
+                        {% endfor %}
+                      </select>
                 </div>
               </div>
               <hr class="mx-n3">

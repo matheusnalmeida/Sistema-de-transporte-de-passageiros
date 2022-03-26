@@ -28,7 +28,7 @@
                        <td>{{item.address}}</td>
                        <td>
                             <a href="{{url_for('driver.update', id=item.id)}}" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                            <a id="delete-driver" href="{{url_for('driver.delete', id=item.id)}}" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                            <a id="delete-driver-{{item.id}}" href="{{url_for('driver.delete', id=item.id)}}" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                         </td>
                     </tr>
                     {% endfor %}

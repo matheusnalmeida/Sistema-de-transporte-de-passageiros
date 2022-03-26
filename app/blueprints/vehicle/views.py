@@ -1,6 +1,7 @@
 from asyncore import read
 from flask import Blueprint, jsonify, redirect, render_template, request, url_for
 from flask_login import login_required
+from app.constants import VEHICLE_TYPES
 from app.models.entities.vehicle import Vehicle
 from app.models.view.vehicle_view_model import VehicleViewModel
 from app.service.vehicle_service import VehicleService
@@ -18,7 +19,7 @@ def index():
 @login_required
 def register():
     if request.method == 'GET':
-        return render_template('vehicle/register.html')
+        return render_template('vehicle/register.html', vehicle_types= VEHICLE_TYPES)
     else:
         new_vehicle = VehicleViewModel(type = request.form['type'],
                         plate = request.form['plate'],
@@ -39,7 +40,7 @@ def register():
 def update(id):
     vehicle = Vehicle.query.get_or_404(id)
     if request.method == 'GET':
-        return render_template('vehicle/update.html', vehicle=vehicle)
+        return render_template('vehicle/update.html', vehicle=vehicle, vehicle_types= VEHICLE_TYPES)
     else:
         vehicle_view = VehicleViewModel(
                         type = request.form['type'],

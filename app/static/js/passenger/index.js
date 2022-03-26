@@ -8,10 +8,10 @@ $(document).ready(function(){
         let date = new Date($(el).text()).toLocaleDateString()
         $(el).text(date)
     })
-
-    $("#delete-passenger").click(function(event) {
+    
+    $('[id^=delete-passenger]').click(function(event) {
         event.preventDefault();
-        let actionUrl = $("#delete-passenger").attr('href')
+        let actionUrl = $(this).attr('href')
         $.ajax({
             type: "GET",
             url: actionUrl,
