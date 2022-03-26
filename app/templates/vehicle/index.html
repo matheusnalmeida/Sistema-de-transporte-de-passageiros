@@ -1,0 +1,44 @@
+{% extends "shared/base.html" %}
+{% block title %}Index{% endblock %}
+{% block head %}
+    {{ super() }}
+    <script src="{{ url_for('static', filename='js/vehicle/index.js') }}"></script>
+{% endblock %}
+{% block content %}
+    <div class="container">
+            <div class="top-table" style="float: right;" >
+                <a class="btn btn-success"  href="{{url_for('vehicle.register')}}"><i class="material-icons" style="vertical-align: -6px;">&#xE147;</i> <span>Adicionar</span></a>
+            </div>      
+            <table style="text-align: center;" class="table justify-content-center align-items-center" >
+                <thead>
+                <tr>
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Placa</th>
+                    <th scope="col">Marca</th>
+                    <th scope="col">Modelo</th>
+                    <th scope="col">Ano</th>
+                    <th scope="col">Capacidade</th>
+                    <th scope="col">CPF do motorista</th>
+                    <th>Ações</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for item in vehicles %}
+                    <tr>
+                       <td>{{item.type}}</td>
+                       <td>{{item.plate}}</td>
+                       <td>{{item.brand}}</span></td>
+                       <td>{{item.model}}</td>
+                       <td>{{item.year}}</td>
+                       <td>{{item.capacity}}</td>
+                       <td class="cpf">{{item.driver.cpf}}</td>
+                       <td>
+                            <a href="{{url_for('vehicle.update', id=item.id)}}" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                            <a id="delete-vehicle" href="{{url_for('vehicle.delete', id=item.id)}}" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>           
+    </div>
+{% endblock %}
