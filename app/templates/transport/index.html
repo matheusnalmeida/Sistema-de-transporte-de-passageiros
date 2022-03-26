@@ -1,0 +1,46 @@
+{% extends "shared/base.html" %}
+{% block title %}Index{% endblock %}
+{% block head %}
+    {{ super() }}
+    <script src="{{ url_for('static', filename='js/transport/index.js') }}"></script>
+{% endblock %}
+{% block content %}
+    <div class="container">
+            <div class="top-table" style="float: right;" >
+                <a class="btn btn-success"  href="{{url_for('transport.register')}}"><i class="material-icons" style="vertical-align: -6px;">&#xE147;</i> <span>Adicionar</span></a>
+            </div>      
+            <table style="text-align: center;" class="table justify-content-center align-items-center" >
+                <thead>
+                <tr>
+                    <th scope="col">Placa do veículo</th>
+                    <th scope="col">CPF do passageiro</th>
+                    <th scope="col">Data do transporte</th>
+                    <th scope="col">Hora do transporte</th>
+                    <th scope="col">Quantidade de KM</th>
+                    <th scope="col">Valor cobrado</th>
+                    <th>Ações</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for item in transports %}
+                    <tr>
+                       <td>{{item.vehicle.plate}}</td>
+                       <td class="cpf">{{item.passenger.cpf}}</td>
+                       <td class="transport-date">{{item.transport_date}}</span></td>
+                       <td>{{item.transport_hour}}</td>
+                       <td>{{item.km_quantity}}</td>
+                       <td>{{item.amount_charged_by_km}}</td>
+                       <td>
+                            <a href="{{url_for('transport.update', id=item.id)}}" class="edit" data-toggle="modal">
+                                <i class="material-icons" style="color: yellow" data-toggle="tooltip" title="Edit">&#xE254;</i>
+                            </a>
+                            <a id="delete-transport-{{item.id}}" href="{{url_for('transport.delete', id=item.id)}}" class="delete" data-toggle="modal">
+                                <i class="material-icons" style="color: red" data-toggle="tooltip" title="Delete">&#xE872;</i>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>           
+    </div>
+{% endblock %}

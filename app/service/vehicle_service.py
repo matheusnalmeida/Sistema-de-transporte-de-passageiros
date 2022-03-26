@@ -1,4 +1,5 @@
 from app.models.entities.driver import Driver
+from app.models.entities.transport import Transport
 from app.models.entities.vehicle import Vehicle
 from app.models.result import Result
 from app.models.view.vehicle_view_model import VehicleViewModel
@@ -54,6 +55,9 @@ class VehicleService:
         return Result(success=True, message="Veiculo atualizado com sucesso!")
 
     def delete_vehicle(self, vehicle: Vehicle):
+        transport = Transport.query.filter_by(vehicle_id=vehicle.id).first()
+        if transport != None:
+            return Result(success=False, message='''Existem registros de transportes cadastrados com esse veiculo!''')
         db.session.delete(vehicle)
         db.session.commit()
         

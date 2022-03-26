@@ -1,0 +1,77 @@
+{% extends "shared/base.html" %}
+{% block title %}Index{% endblock %}
+{% block head %}
+    {{ super() }}
+    <script src="{{ url_for('static', filename='js/transport/register.js') }}"></script>
+{% endblock %}
+{% block content %}
+<form id="transport-user-form" action="#" method="post">
+    <div class="container">
+      <div style="padding: 100px;" class="row d-flex justify-content-center align-items-center">
+        <div class="col-xl-9">
+          <div class="card" style="border-radius: 15px;">
+            <div class="card-body">
+              <div class="row align-items-center pt-4 pb-3">
+                <div class="col-md-3 ps-5">
+                  <h6 class="mb-0">Placa do veiculo</h6>
+                </div>
+                <div class="col-md-9 pe-5">
+                    <input id="plate-input" type="text" class="form-control form-control-lg" placeholder="AAA-9999" name="plate"/>
+                </div>
+              </div>
+              <hr class="mx-n3">          
+              <div class="row align-items-center pt-4 pb-3">
+                <div class="col-md-3 ps-5">
+                  <h6 class="mb-0">CPF do Passageiro</h6>
+                </div>
+                <div class="col-md-9 pe-5">
+                  <input id="cpf-input" type="text" class="form-control form-control-lg" name="cpf-passenger"/>
+                </div>
+              </div>   
+              <hr class="mx-n3">
+              <div class="row align-items-center pt-4 pb-3">
+                <div class="col-md-3 ps-5">
+                  <h6 class="mb-0">Data do transporte</h6>
+                </div>
+                <div class="col-md-9 pe-5">
+                  <input id="transport-date-input" type="date" class="form-control form-control-lg"  name="transport-date"/>
+                </div>
+              </div>
+              <hr class="mx-n3">
+              <div class="row align-items-center pt-4 pb-3">
+                <div class="col-md-3 ps-5">
+                  <h6 class="mb-0">Hora do transporte</h6>
+                </div>
+                <div class="col-md-9 pe-5">
+                    <input id="transport-hour-input" type="time" class="form-control form-control-lg" name="transport-hour"/>
+                </div>
+              </div>    
+              <hr class="mx-n3">
+              <div class="row align-items-center pt-4 pb-3">
+                <div class="col-md-3 ps-5">
+                  <h6 class="mb-0">Quantidade de quilômetros</h6>
+                </div>
+                <div class="col-md-9 pe-5">
+                    <input id="km-quantitty-input" type="number" class="form-control form-control-lg" name="km-quantitty"/>
+                </div>
+              </div> 
+              <hr class="mx-n3">
+              <div class="row align-items-center pt-4 pb-3">
+                <div class="col-md-3 ps-5">
+                  <h6 class="mb-0">Valor cobrado:</h6>
+                </div>
+                <div class="col-md-9 pe-5">
+                    <input id="amount-charged-input" type="number" class="form-control form-control-lg" name="amount-charged"/>
+                </div>
+              </div>                                                                            
+              <hr class="mx-n3">
+              <div style="float: right;" class="px-5 py-4">
+                <button type="submit" class="btn btn-primary btn-lg">Cadastrar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+{% endblock %}

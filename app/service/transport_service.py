@@ -11,6 +11,7 @@ class TransportService:
 
     def insert_transport(self, transport: TransportViewModel) -> Result:
         new_transport = Transport(
+            transport_date = transport.transport_date,
             transport_hour = transport.transport_hour,
             km_quantity = transport.km_quantity,
             amount_charged_by_km = transport.amount_charged_by_km
@@ -61,7 +62,7 @@ class TransportService:
         
         return Result(success=True, message="Registro de transporte deletado com sucesso!")
 
-    def get_all(self):
+    def get_all(self): 
         return Transport.query.all()
 
     def __validate_vehicle_exists(self, vehicle_plate: str) -> Result:

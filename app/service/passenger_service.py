@@ -1,4 +1,5 @@
 from app.models.entities.passenger import Passenger
+from app.models.entities.transport import Transport
 from app.models.result import Result
 from app.extensions import db
 from app.models.view.passenger_view_model import PassengerViewModel
@@ -35,6 +36,9 @@ class PassengerService:
         return Result(success=True, message="Passageiro atualizado com sucesso!")
 
     def delete_passenger(self, passenger: Passenger):
+        transport = Transport.query.filter_by(passenger_id=passenger.id).first()
+        if transport != None:
+            return Result(success=False, message='''Existem registros de transportes cadastrados com esse passageiro!''')
         db.session.delete(passenger)
         db.session.commit()
         

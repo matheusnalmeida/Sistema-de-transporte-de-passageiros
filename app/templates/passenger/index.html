@@ -31,8 +31,12 @@
                        <td>{{item.uf}}</span></td>
                        <td>{{item.address}}</td>
                        <td>
-                            <a href="{{url_for('passenger.update', id=item.id)}}" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                            <a id="delete-passenger-{{item.id}}" href="{{url_for('passenger.delete', id=item.id)}}" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                            <a href="{{url_for('passenger.update', id=item.id)}}" class="edit" data-toggle="modal">
+                                <i class="material-icons" style="color: yellow" data-toggle="tooltip" title="Edit">&#xE254;</i>
+                            </a>
+                            <a id="delete-passenger-{{item.id}}" href="{{url_for('passenger.delete', id=item.id)}}" class="delete" data-toggle="modal">
+                                <i class="material-icons" style="color: red" data-toggle="tooltip" title="Delete">&#xE872;</i>
+                            </a>
                         </td>
                     </tr>
                     {% endfor %}

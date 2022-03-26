@@ -17,10 +17,15 @@ def index():
 @login_required
 def register():
     if request.method == 'GET':
-        return render_template('transports/register.html')
+        return render_template('transport/register.html')
     else:
-        # TODO FILL TRANSPORT VIEW MODEL
-        new_transport = TransportViewModel()        
+        new_transport = TransportViewModel(
+            plate = request.form['plate'],
+            cpf_passenger = request.form['cpf-passenger'],
+            transport_date = request.form['transport-date'],
+            transport_hour = request.form['transport-hour'],
+            km_quantity = request.form['km-quantitty'],
+        )        
         result = transport_service.insert_transport(new_transport)
 
         if result.success:
@@ -35,8 +40,13 @@ def update(id):
     if request.method == 'GET':
         return render_template('transport/update.html', transport=transport)
     else:
-        # TODO FILL TRANSPORT VIEW MODEL
-        transport_view = TransportViewModel()
+        transport_view = TransportViewModel(
+            plate = request.form['plate'],
+            cpf_passenger = request.form['cpf-passenger'],
+            transport_date = request.form['transport-date'],
+            transport_hour = request.form['transport-hour'],
+            km_quantity = request.form['km-quantitty'],
+        )        
 
         result = transport_service.update_transport(transport, transport_view)
 

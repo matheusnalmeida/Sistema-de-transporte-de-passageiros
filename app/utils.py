@@ -21,8 +21,13 @@ def cpf_formatter(cpf :str):
         if len(cpf_digits) > 0:      
             return cpf_digits[0]  
 
+def valid_hour_format(hour: str):
+    # HH:MM
+    hour_match = re.fullmatch(r'^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$', hour)
+    return hour_match and hour_match.group() == hour
+
 def calculate_amount_charged(km_quantity):
-    return 0.40 * km_quantity
+    return round(0.40 * km_quantity, 2)
 
 def valid_amount_charged(km_quantity, amount_charged):
-    return 0.40 * km_quantity == amount_charged
+    return round(0.40 * km_quantity, 2) == amount_charged
