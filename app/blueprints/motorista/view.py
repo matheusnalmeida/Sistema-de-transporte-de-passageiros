@@ -40,14 +40,14 @@ def update(id):
     if request.method == 'GET':
         return render_template('motorista/update.html', motorista=motorista)
     else:
-        passenger_view = MotoristaViewModel(
+        motorista_view = MotoristaViewModel(
                         name = request.form["name"],
                         birth_date = request.form["birthdate"],
                         address= request.form["address"],
                         city = request.form["city"],
                         uf=request.form["uf"])
 
-        result = motorista_service.update_passenger(motorista, passenger_view)
+        result = motorista_service.update_motorista(motorista, motorista_view)
 
         if result.success:
             result.url = url_for('motorista.index')
@@ -58,6 +58,6 @@ def update(id):
 @login_required
 def delete(id):
     motorista = Motorista.query.get_or_404(id)
-    result = motorista_service.delete_passenger(motorista)        
+    result = motorista_service.delete_motorista(motorista)        
     result.url = url_for('motorista.index')
     return jsonify(result.to_json())

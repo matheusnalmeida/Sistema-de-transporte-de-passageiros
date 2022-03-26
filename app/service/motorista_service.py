@@ -10,7 +10,7 @@ class MotoristaService:
     def __init__(self) -> None:
         pass
 
-    def insert_passenger(self, motorista: Motorista) -> Result:
+    def insert_motorista(self, motorista: Motorista) -> Result:
         result = motorista.is_valid()
         if not result.success:
             return result
