@@ -20,3 +20,9 @@ def cpf_formatter(cpf :str):
         cpf_digits = re.findall(r'\d+', cpf)    
         if len(cpf_digits) > 0:      
             return cpf_digits[0]  
+
+def calculate_amount_charged(km_quantity):
+    return 0.40 * km_quantity
+
+def valid_amount_charged(km_quantity, amount_charged):
+    return 0.40 * km_quantity == amount_charged

@@ -1,6 +1,3 @@
-from xml.etree.ElementTree import TreeBuilder
-
-from jinja2 import pass_eval_context
 from app.models.entities.passenger import Passenger
 from app.models.result import Result
 from app.extensions import db

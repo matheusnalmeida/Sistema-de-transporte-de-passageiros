@@ -1,0 +1,1 @@
+from app.blueprints.transport.views import transport as transport
