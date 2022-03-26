@@ -50,7 +50,7 @@ class Driver(db.Model):
 
         return Result(success=True)            
     
-    def fill_update(self, motorista: DriverViewModel):
-        self.name = motorista.name
-        self._set_birthdate(motorista.birth_date)
-        self.address = motorista.address
+    def fill_update(self, driver: DriverViewModel):
+        self.name = driver.name
+        self._set_birthdate(driver.birth_date)
+        self.address = driver.address

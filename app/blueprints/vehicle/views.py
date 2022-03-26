@@ -20,45 +20,46 @@ def register():
     if request.method == 'GET':
         return render_template('vehicle/register.html')
     else:
-        new_vehicle = VehicleViewModel(type = request.form['tyoe'],
+        new_vehicle = VehicleViewModel(type = request.form['type'],
                         plate = request.form['plate'],
                         brand = request.form['brand'],
                         model = request.form['model'],
                         year = request.form['year'],
                         capacity = request.form['capacity'],
-                        driver_cpf = request.form['driver_cpf'])        
-        result = vehicle_service.insert_passenger(new_vehicle)
+                        driver_cpf = request.form['driver-cpf'])        
+        result = vehicle_service.insert_vehicle(new_vehicle)
 
         if result.success:
             result.url = url_for('vehicle.index')
 
         return jsonify(result.to_json())
 
-#@passenger.route("<int:id>/update", methods=['GET', 'POST'])
-#@login_required
-#def update(id):
-#    passenger = Passenger.query.get_or_404(id)
-#    if request.method == 'GET':
-#        return render_template('passenger/update.html', passenger=passenger)
-#    else:
-#        passenger_view = PassengerViewModel(
-#                        name = request.form["name"],
-#                        birth_date = request.form["birthdate"],
-#                        address= request.form["address"],
-#                        city = request.form["city"],
-#                        uf=request.form["uf"])
-#
-#        result = passenger_service.update_passenger(passenger, passenger_view)
-#
-#        if result.success:
-#            result.url = url_for('passenger.index')
-#
-#        return jsonify(result.to_json())
-#        
-#@passenger.route("<int:id>/delete", methods=['GET'])
-#@login_required
-#def delete(id):
-#    passenger = Passenger.query.get_or_404(id)
-#    result = passenger_service.delete_passenger(passenger)        
-#    result.url = url_for('passenger.index')
-#    return jsonify(result.to_json())
+@vehicle.route("<int:id>/update", methods=['GET', 'POST'])
+@login_required
+def update(id):
+    vehicle = Vehicle.query.get_or_404(id)
+    if request.method == 'GET':
+        return render_template('vehicle/update.html', vehicle=vehicle)
+    else:
+        vehicle_view = VehicleViewModel(
+                        type = request.form['type'],
+                        brand = request.form['brand'],
+                        model = request.form['model'],
+                        year = request.form['year'],
+                        capacity = request.form['capacity'],
+                        driver_cpf = request.form['driver-cpf'])
+
+        result = vehicle_service.update_vehicle(vehicle, vehicle_view)
+
+        if result.success:
+            result.url = url_for('vehicle.index')
+
+        return jsonify(result.to_json())
+        
+@vehicle.route("<int:id>/delete", methods=['GET'])
+@login_required
+def delete(id):
+    vehicle = Vehicle.query.get_or_404(id)
+    result = vehicle_service.delete_vehicle(vehicle)        
+    result.url = url_for('vehicle.index')
+    return jsonify(result.to_json())

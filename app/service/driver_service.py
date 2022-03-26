@@ -1,5 +1,6 @@
 from xml.etree.ElementTree import TreeBuilder
 from app.models.entities.driver import Driver
+from app.models.entities.vehicle import Vehicle
 from app.models.result import Result
 from app.extensions import db
 from app.models.view.driver_view_model import DriverViewModel
@@ -36,6 +37,12 @@ class DriverService:
         return Result(success=True, message="Motorista atualizado com sucesso!")
 
     def delete_driver(self, driver: Driver):
+        vehicle = Vehicle.query.filter_by(driver_id=driver.id).first()
+        if vehicle != None:
+            return Result(success=False, message='''Existem veiculos cadastradados com este motorista!
+                                                     Delete antes os veiculos associados para deletar 
+                                                     o motorista.''')
+
         db.session.delete(driver)
         db.session.commit()
         

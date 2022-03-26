@@ -35,7 +35,7 @@ def register():
 def update(id):
     driver = Driver.query.get_or_404(id)
     if request.method == 'GET':
-        return render_template('driver/update.html', motorista=driver)
+        return render_template('driver/update.html', driver=driver)
     else:
         driver_view = DriverViewModel(
                         name = request.form["name"],
@@ -52,7 +52,8 @@ def update(id):
 @driver.route("<int:id>/delete", methods=['GET'])
 @login_required
 def delete(id):
-    motorista = Driver.query.get_or_404(id)
-    result = driver_service.delete_driver(motorista)        
-    result.url = url_for('driver.index')
+    driver = Driver.query.get_or_404(id)
+    result = driver_service.delete_driver(driver) 
+    if result.success:      
+        result.url = url_for('driver.index')
     return jsonify(result.to_json())

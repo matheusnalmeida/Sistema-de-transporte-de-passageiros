@@ -17,6 +17,7 @@
         {% if current_user.is_authenticated %}
             <a href="{{ url_for('passenger.index') }}">Passageiros</a>
             <a href="{{ url_for('driver.index') }}">Motoristas</a>
+            <a href="{{ url_for('vehicle.index') }}">Veiculos</a>
             <a href="{{ url_for('auth.logout') }}">Logout</a>
         {% else %}
             <a href="{{ url_for('auth.register') }}">Registrar</a>

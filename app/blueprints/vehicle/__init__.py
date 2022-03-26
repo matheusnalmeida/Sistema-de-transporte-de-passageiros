@@ -1,0 +1,1 @@
+from app.blueprints.vehicle.views import vehicle as vehicle

@@ -1,6 +1,7 @@
 from sqlalchemy import Column
 from app.extensions import db
 from app.models.result import Result
+from app.models.view.vehicle_view_model import VehicleViewModel
 
 class Vehicle(db.Model):
     __tablename__ = 'vehicles'
@@ -12,8 +13,8 @@ class Vehicle(db.Model):
     model = Column(db.String(255), nullable=False)
     year = Column(db.Integer, nullable=False)
     capacity = Column(db.Integer, nullable=False)
-    driver_id = db.Column(db.Integer, db.ForeignKey('driver.id'), nullable=False)
-    driver = db.relationship("drivers", backref="driver", uselist=False) 
+    driver_id = db.Column(db.Integer, db.ForeignKey('drivers.id'), nullable=False)
+    driver = db.relationship("Driver", backref="driver", uselist=False) 
 
     def is_valid(self) -> Result:
         if (
@@ -23,7 +24,7 @@ class Vehicle(db.Model):
             not self.model or len(self.model) == 0 or
             not self.year or self.year == 0 or
             not self.capacity or
-            self.driver == None
+            not self.driver_id or self.driver_id == 0
         ):
             return Result(success= False,message= "Preencha todos os campos!")
 
@@ -35,9 +36,9 @@ class Vehicle(db.Model):
 
         return Result(success=True)            
     
-    #def fill_update(self, passenger: PassengerViewModel):
-    #    self.name = passenger.name
-    #    self._set_birthdate(passenger.birth_date)
-    #    self.city = passenger.city
-    #    self.uf = passenger.uf
-    #    self.address = passenger.address
+    def fill_update(self, vehicle: VehicleViewModel):
+        self.type = vehicle.type
+        self.brand = vehicle.brand
+        self.model = vehicle.model
+        self.year = vehicle.year
+        self.capacity = vehicle.capacity
