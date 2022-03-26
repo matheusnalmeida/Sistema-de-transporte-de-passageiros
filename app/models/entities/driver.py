@@ -2,19 +2,17 @@ from sqlalchemy import Column
 from app.extensions import db
 from app.models.result import Result
 from datetime import datetime
-from app.models.view.motorista_view_model import MotoristaViewModel
+from app.models.view.driver_view_model import DriverViewModel
 
 from app.utils import cpf_formatter
 
-class Motorista(db.Model):
+class Driver(db.Model):
     __tablename__ = 'drivers'
 
     id = Column(db.Integer, primary_key=True)
     name = Column(db.String(255), nullable=False, unique=True)
     _birth_date = Column('birth_date', db.DateTime, nullable=False)
     _cpf = Column('cpf', db.String(11), nullable = False, unique = True)
-    city = Column(db.String(255), nullable=False)
-    uf = Column(db.String(2), nullable=False)
     address = Column(db.String(255), nullable=False)
 
     def _get_cpf(self):
@@ -37,29 +35,22 @@ class Motorista(db.Model):
         if (
             not self.name or len(self.name) == 0 or
             not self.cpf or len(self.cpf) == 0 or
-            not self.address or len(self.address) == 0 or
-            not self.uf or len(self.address) == 0 or
-            not self.city or len(self.city) == 0
+            not self.address or len(self.address) == 0
         ):
             return Result(success= False,message= "Preencha todos os campos!")
-
-        if len(self.uf) < 2 or len(self.uf) > 2:
-            return Result(success= False,message= "O códigod a UF precisa de exatamente dois digitos!")
 
         if not self.cpf or len(self.cpf) < 11:
             return Result(success= False,message= "CPF inválido!")
         
         if not self.birth_date:
-            return Result(success= False,message= "Data inválida!")
+            return Result(success= False,message= "Data de nascimento inválida!")
                 
         if  datetime.now().date() < self.birth_date:
             return Result(success= False,message= "A data de nascimento não pode ser maior que a data atual!")
 
         return Result(success=True)            
     
-    def fill_update(self, motorista: MotoristaViewModel):
+    def fill_update(self, motorista: DriverViewModel):
         self.name = motorista.name
         self._set_birthdate(motorista.birth_date)
-        self.city = motorista.city
-        self.uf = motorista.uf
         self.address = motorista.address

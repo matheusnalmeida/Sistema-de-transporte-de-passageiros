@@ -9,9 +9,9 @@ $(document).ready(function(){
         $(el).text(date)
     })
 
-    $("#delete-motorista").click(function(event) {
+    $("#delete-driver").click(function(event) {
         event.preventDefault();
-        let actionUrl = $("#delete-motorista").attr('href')
+        let actionUrl = $("#delete-driver").attr('href')
         $.ajax({
             type: "GET",
             url: actionUrl,

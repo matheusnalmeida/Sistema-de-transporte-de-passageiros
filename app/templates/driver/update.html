@@ -2,10 +2,10 @@
 {% block title %}Index{% endblock %}
 {% block head %}
     {{ super() }}
-    <script src="{{ url_for('static', filename='js/motorista/register.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/driver/update.js') }}"></script>
 {% endblock %}
 {% block content %}
-<form id="motorista-user-form" action="#" method="post">
+<form id="driver-user-form" action="#" method="post">
     <div class="container">
       <div style="padding: 100px;" class="row d-flex justify-content-center align-items-center">
         <div class="col-xl-9">
@@ -16,7 +16,7 @@
                   <h6 class="mb-0">Nome</h6>
                 </div>
                 <div class="col-md-9 pe-5">
-                  <input id="name-input" type="text" class="form-control form-control-lg" name="name"/>
+                  <input id="name-input" type="text" class="form-control form-control-lg" name="name" value="{{ motorista.name }}"/>
                 </div>
               </div>
               <hr class="mx-n3">
@@ -25,7 +25,7 @@
                   <h6 class="mb-0">Data de nascimento</h6>
                 </div>
                 <div class="col-md-9 pe-5">
-                  <input id="birthdate-input" type="date" class="form-control form-control-lg"  name="birthdate"/>
+                  <input id="birthdate-input" type="date" class="form-control form-control-lg"  name="birthdate" value="{{ motorista.birth_date.strftime('%Y-%m-%d') }}"/>
                 </div>
               </div>
               <hr class="mx-n3">          
@@ -34,7 +34,7 @@
                   <h6 class="mb-0">CPF</h6>
                 </div>
                 <div class="col-md-9 pe-5">
-                  <input id="cpf-input" type="text" class="form-control form-control-lg" name="cpf"/>
+                  <input id="cpf-input" type="text" class="form-control form-control-lg" name="cpf" value="{{ motorista.cpf }}" disabled/>
                 </div>
               </div>
               <hr class="mx-n3">          
@@ -43,30 +43,12 @@
                   <h6 class="mb-0">Endereço</h6>
                 </div>
                 <div class="col-md-9 pe-5">
-                  <input id="address-input" type="text" class="form-control form-control-lg" name="address"/>
+                  <input id="address-input" type="text" class="form-control form-control-lg" name="address" value="{{ motorista.address }}"/>
                 </div>
-              </div>
-              <hr class="mx-n3">                     
-              <div class="row align-items-center py-3">
-                <div class="col-md-3 ps-5">
-                  <h6 class="mb-0">Cidade</h6>
-                </div>
-                <div class="col-md-9 pe-5">
-                  <input id="city-input" type="text" class="form-control form-control-lg" name="city"/>
-                </div>
-              </div>
-              <hr class="mx-n3">
-              <div class="row align-items-center py-3">
-                <div class="col-md-3 ps-5">
-                  <h6 class="mb-0">UF</h6>
-                </div>
-                <div class="col-md-9 pe-5">
-                    <input id="uf-input" type="text" class="form-control form-control-lg" name="uf" maxlength="2"/>
-                </div>
-              </div>                
+              </div>           
               <hr class="mx-n3">
               <div style="float: right;" class="px-5 py-4">
-                <button type="submit" class="btn btn-primary btn-lg">Cadastrar</button>
+                <button type="submit" class="btn btn-primary btn-lg">Editar</button>
               </div>
             </div>
           </div>

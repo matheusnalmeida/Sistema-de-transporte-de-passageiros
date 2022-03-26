@@ -51,9 +51,9 @@ def configure_blueprints(appl):
     from app.blueprints.main import main
     from app.blueprints.auth import auth
     from app.blueprints.passenger import passenger
-    from app.blueprints.motorista import motorista
+    from app.blueprints.driver import driver
 
-    for bp in [main, auth, passenger, motorista]:
+    for bp in [main, auth, passenger, driver]:
         appl.register_blueprint(bp)
 
 def configure_hook(app):

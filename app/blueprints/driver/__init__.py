@@ -1,0 +1,1 @@
+from app.blueprints.driver.view import driver as driver
