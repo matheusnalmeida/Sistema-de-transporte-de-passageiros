@@ -1,0 +1,1 @@
+from app.blueprints.motorista.view import motorista as motorista
