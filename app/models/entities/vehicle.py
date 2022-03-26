@@ -1,4 +1,5 @@
 from sqlalchemy import Column
+from app.constants import VEHICLE_TYPES
 from app.extensions import db
 from app.models.result import Result
 from app.models.view.vehicle_view_model import VehicleViewModel
@@ -27,6 +28,10 @@ class Vehicle(db.Model):
             not self.driver_id or self.driver_id == 0
         ):
             return Result(success= False,message= "Preencha todos os campos!")
+        
+        if self.type.lower() not in VEHICLE_TYPES.keys():
+            vehicle_valid_types = ', '.join(str(x) for x in VEHICLE_TYPES.values())
+            return Result(success= False,message= f"Tipo de veiculo inválido!\nOs possiveis tipos de veiculos são: {vehicle_valid_types}")
 
         if self.capacity <= 0:
             return Result(success= False,message= "A capacidade precisa ser maior que zero!")
