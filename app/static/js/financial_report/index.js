@@ -1,14 +1,4 @@
 $(document).ready(function () {
-  $("td[class*='cpf']").each(function(index, el){
-    let cpf = $(el).text()
-    $(el).text(cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4"))
-  })
-  
-  $("td[class*='transport-date']").each(function(index, el){
-    let date = new Date($(el).text()).toLocaleDateString()
-    $(el).text(date)
-  })
-
   $('#button-filter').click(function (event) {
     event.preventDefault();
     let actionUrl = $(this).attr('href')

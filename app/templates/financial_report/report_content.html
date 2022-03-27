@@ -1,9 +1,12 @@
+<script src="{{ url_for('static', filename='js/financial_report/report_content.js') }}"></script>
 {% if transports | length > 0 %}
     <table style="text-align: center;" class="table justify-content-center align-items-center" >
         <thead>
         <tr>
             <th scope="col">Placa do veículo</th>
+            <th scope="col">Modelo do veículo</th>
             <th scope="col">CPF do passageiro</th>
+            <th scope="col">Nome do passageiro</th>
             <th scope="col">Data do transporte</th>
             <th scope="col">Hora do transporte</th>
             <th scope="col">Quantidade de KM</th>
@@ -14,7 +17,9 @@
             {% for item in transports %}
             <tr>
             <td>{{item.vehicle.plate}}</td>
+            <td>{{item.vehicle.model}}</td>
             <td class="cpf">{{item.passenger.cpf}}</td>
+            <td>{{item.passenger.name}}</td>
             <td class="transport-date">{{item.transport_date}}</span></td>
             <td>{{item.transport_hour}}</td>
             <td>{{item.km_quantity}}</td>
@@ -24,19 +29,32 @@
         </tbody>
     </table>
     <hr class="border-5 border-top" style="border-color: black !important;">      
+
     <h2 style="text-align: center; margin-bottom: 40px;">
         Resumo
     </h2>
     <div class="col-md-12" style="margin-bottom: 50px;">
-        <p>Valor total arrecadado por Carro: -</p>
-        <p>Valor total arrecadado por Onibus: -</p>
-        <p>Valor total arrecadado por Van: -</p>
+        {% for type in vehicle_types %}
+            {% if type in aggregate_transports %}
+                <p>Valor total arrecadado por {{type}}: {{ aggregate_transports[type]['total_amount_charged'] }}</p>
+            {% else %}
+                <p>Valor total arrecadado por {{type}}: -</p>
+            {% endif %}
+        {% endfor %}
     </div>                 
-    <div class="col-md-12">
-        <p>Quantidade de transportes realizados por Carro: -</p>
-        <p>Quantidade de transportes realizados por Onibus: -</p>
-        <p>Quantidade de transportes realizados por Van: -</p>
-    </div>     
+    <div class="col-md-12" style="margin-bottom: 50px;">
+        {% for type in vehicle_types %}
+            {% if type in aggregate_transports %}
+                <p>Quantidade de transportes realizados por {{type}}: {{ aggregate_transports[type]['total_transports'] }}</p>
+            {% else %}
+                <p>Quantidade de transportes realizados por {{type}}: -</p>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <div class="col-md-12" style="margin-bottom: 50px;">
+        <p>Quantidade total de transportes realizados: {{ aggregate_transports['total_transports'] }}</p>
+        <p>Valor total arrecadado: {{ aggregate_transports['total_amount_charged'] }}</p>
+    </div>    
 {% else %}
-<h1 style="text-align: center; vertical-align: middle;">Nenhum resultado encontrado!</h1> 
+    <h1 style="text-align: center; vertical-align: middle;">Nenhum resultado encontrado!</h1> 
 {% endif %}
