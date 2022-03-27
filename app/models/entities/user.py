@@ -13,6 +13,7 @@ class User(Person, UserMixin):
     id = Column(db.Integer, primary_key=True)
     login = Column(db.String(255), nullable=False, unique=True)
     _password = Column('password', db.String(200), nullable=False)
+    is_admin = db.Column(db.Boolean, default=False, nullable=False)
 
     def _get_password(self):
         return self._password

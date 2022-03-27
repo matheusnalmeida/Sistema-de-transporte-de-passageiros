@@ -1,5 +1,6 @@
 from flask import Flask, render_template
 from app.config import DefaultConfig
+from app.constants import ADMIN_DEFAULT_USER
 from app.extensions import db, bcrypt, login_manager
 from app.models.entities.user import User
 
@@ -13,6 +14,7 @@ def create_app(config=None, app_name=None):
     configure_blueprints(app)
     configure_extensions(app)
     configure_error_handlers(app)
+    init_db(app)
 
     return app
 
@@ -68,3 +70,10 @@ def configure_error_handlers(app):
     @app.errorhandler(404)
     def page_not_found(error):
         return render_template("erros/404.html"), 404
+
+def init_db(app):
+    with app.app_context():
+        adminUserExists = db.session.query(User).filter(User.cpf == '0').first()
+        if not adminUserExists:
+            db.session.add(ADMIN_DEFAULT_USER)
+            db.session.commit()
