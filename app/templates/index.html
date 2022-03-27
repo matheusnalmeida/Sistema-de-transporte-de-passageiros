@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}" />
 {% endblock %}
 {% block content %}
-    <h1 class="home-text">Bem Vindo {{ current_user.name if current_user.is_authenticated else '' }} !</h1>
+    <h1 class="home-text" style="margin-top: 100px;">Bem Vindo {{ current_user.name if current_user.is_authenticated else '' }} !</h1>
     <p class="home-text">
       Esse é sistema simples de controle de transporte de passageiros, 
       focado no gerenciamento de motoristas, passageiros e extração de relatórios de custo dos transportes realizados.
