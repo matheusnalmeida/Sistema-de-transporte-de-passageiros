@@ -11,7 +11,9 @@ class Result:
 
         if (self.data and hasattr(self.data, '__dict__')):
            json_data = vars(self.data) 
-           
+        else:
+            json_data = self.data
+            
         return {
             "id": self.id,
             "success": self.success,

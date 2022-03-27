@@ -1,0 +1,1 @@
+from app.blueprints.financial_report.view import financial_report as financial_report

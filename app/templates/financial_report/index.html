@@ -1,0 +1,27 @@
+{% extends "shared/base.html" %}
+{% block title %}Index{% endblock %}
+{% block head %}
+    {{ super() }}
+    <script src="{{ url_for('static', filename='js/financial_report/index.js') }}"></script>
+{% endblock %}
+{% block content %}
+    <div class="container">            
+            <div class="row align-items-center" style="padding-top: 35px; margin-bottom: 20px;">
+                <div class="col-md-6">
+                    <h6 class="mb-3">Data inicio do transporte:</h6>
+                    <input id="transport-begindate-input" type="date" class="form-control form-control-lg"  name="transport-begin-date"/>
+                </div>
+                <div class="col-md-6">
+                    <h6 class="mb-3">Data fim do transporte:</h6>
+                    <input id="transport-enddate-input" type="date" class="form-control form-control-lg"  name="transport-end-date"/>
+                </div>
+                <div class="col-md-12" >
+                    <a id='button-filter' class="btn btn-success" style="margin-top: 25px; float: right;"  href="{{url_for('financial_report.search')}}">
+                        <i class="material-icons" style="vertical-align: -6px;">&#xe8b6;</i><span>Buscar</span></a>   
+                </div>                 
+            </div>
+            <div id="report-content">
+                {% include 'financial_report/report_content.html' %}
+            </div>
+    </div>
+{% endblock %}
