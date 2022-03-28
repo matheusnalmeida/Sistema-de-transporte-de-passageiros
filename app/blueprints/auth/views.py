@@ -30,21 +30,3 @@ def logout():
     if current_user.is_authenticated:
         logout_user()
     return redirect(url_for('auth.login'))
-
-@auth.route('/register', methods=['GET', 'POST'])
-def register():
-    if request.method == 'GET':
-        return render_template('auth/register.html')
-    else:
-        newUser = User(name = request.form['name'],
-                        birth_date = request.form['birthdate'],
-                        cpf = request.form['cpf'],
-                        login = request.form['login'],
-                        password = request.form['password'],
-                        address = request.form['address'])        
-        result = user_service.insert_user(newUser)
-
-        if result.success:
-            result.url = url_for('auth.login')
-
-        return jsonify(result.to_json())

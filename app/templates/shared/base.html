@@ -16,7 +16,7 @@
         <a href="{{ url_for('main.index') }}">Home</a>
         {% if current_user.is_authenticated %}
             {% if current_user.is_admin %}
-                <a href="{{ url_for('auth.register') }}">Registrar</a>
+                <a href="{{ url_for('user.index') }}">Usuários</a>
                 <a href="{{ url_for('passenger.index') }}">Passageiros</a>
                 <a href="{{ url_for('driver.index') }}">Motoristas</a>
                 <a href="{{ url_for('vehicle.index') }}">Veiculos</a>

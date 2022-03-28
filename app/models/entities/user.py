@@ -5,7 +5,7 @@ from app.models.entities.shared.person import Person
 from app.models.result import Result
 from datetime import datetime
 
-from app.utils import cpf_formatter
+from app.models.view.user_view_model import UserViewModel
 
 class User(Person, UserMixin):
     __tablename__ = 'users'
@@ -48,3 +48,9 @@ class User(Person, UserMixin):
             return Result(success= False,message= "A data de nascimento não pode ser maior que a data atual!")
 
         return Result(success=True)            
+
+    def fill_update(self, user: UserViewModel):
+        self.name = user.name
+        self.birth_date = user.birth_date
+        self.address = user.address
+        self.login = user.login

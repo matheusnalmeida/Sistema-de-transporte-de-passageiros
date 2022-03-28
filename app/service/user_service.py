@@ -2,6 +2,7 @@ from flask_login import login_user
 from app.models.result import Result
 from app.models.entities.user import User
 from app.extensions import db
+from app.models.view.user_view_model import UserViewModel
 
 class UserService:
     def __init__(self) -> None:
@@ -18,6 +19,9 @@ class UserService:
             return Result(success=True)
         else:
             return Result(success=False, message="Não foi encontrado usuário com o usuário e senha informados!")
+    
+    def get_all_non_admin(self):
+        return User.query.filter(User.is_admin == False).all()
 
     def insert_user(self, user: User) -> Result:
         result = user.is_valid()
@@ -40,3 +44,19 @@ class UserService:
         db.session.commit()
         return Result(success= True, message= "Usuário registrado com sucesso!")
         
+
+    def update_user(self, current_user: User, user_view: UserViewModel):
+        current_user.fill_update(user_view)
+        result = current_user.is_valid()
+
+        if not result.success:
+            return result
+
+        db.session.commit()
+        return Result(success=True, message="Usuario atualizado com sucesso!")
+
+    def delete_user(self, user: User):
+        db.session.delete(user)
+        db.session.commit()
+        
+        return Result(success=True, message="Usuario deletado com sucesso!")
