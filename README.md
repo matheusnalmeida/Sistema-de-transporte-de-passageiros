@@ -10,3 +10,17 @@ Sistema para transporte de passageiros desenvolvido na linguagem python com o fr
 ## Usuário padrão
 
 - O usuário padrão do projeto é o administrador "Sr. Francisco" que possui login igual a ```admin``` e senha igual a ```admin```. Logando com esse usuário será possivel acessar as outras funcionalidades do portal.
+
+## Bibliotecas/Frameworks Utilizados
+
+#### Frontend
+
+- JQuery
+- JQuery.Mask
+- Toastr
+- Bootstrap
+
+#### Backend
+
+- Flask
+- Jinja
