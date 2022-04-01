@@ -24,3 +24,7 @@ Sistema para transporte de passageiros desenvolvido na linguagem python com o fr
 
 - Flask
 - Jinja
+
+#### Banco de dados
+
+- SQL Alchemy
