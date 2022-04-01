@@ -18,9 +18,8 @@ $(document).ready(function(){
       var transportDateFilled = !!$("#transport-date-input").val().trim()
       var transportHourFilled = !!$("#transport-hour-input").val().trim()
       var kmQuantitylFilled = !!$("#km-quantitty-input").val().trim()
-      var amountChargedFilled = !!$("#amount-charged-input").val().trim()
 
-      if (!plateFilled || !cpfFilled || !transportDateFilled || !transportHourFilled || !kmQuantitylFilled || !amountChargedFilled) {          
+      if (!plateFilled || !cpfFilled || !transportDateFilled || !transportHourFilled || !kmQuantitylFilled) {          
         toastr.error('Por favor preencha todos os dados para seguir com a inserção!')
         return;
       }
